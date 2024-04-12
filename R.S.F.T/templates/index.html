@@ -1,0 +1,49 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Login & Signup</title>
+    <style>
+        body {
+            font-family: Arial, sans-serif;
+            text-align: center;
+            margin: 50px;
+        }
+        button {
+            padding: 10px 20px;
+            font-size: 16px;
+            margin: 10px;
+            cursor: pointer;
+        }
+        #loginBtn {
+            background-color: #4CAF50;
+            color: white;
+        }
+        #signupBtn {
+            background-color: #008CBA;
+            color: white;
+        }
+    </style>
+</head>
+<body>
+
+<h2>Welcome to our Website</h2>
+
+<button id="loginBtn" onclick="redirectToLogin()">Login</button>
+<button id="signupBtn" onclick="redirectToSignup()">Register</button>
+
+<script>
+    function redirectToLogin() {
+        // Προσαρμόστε το URL προς τη σελίδα login
+        window.location.href = "/TourRecSys/Login";
+    }
+
+    function redirectToSignup() {
+        // Προσαρμόστε το URL προς τη σελίδα signup
+        window.location.href = "/TourRecSys/Register";
+    }
+</script>
+
+</body>
+</html>

@@ -1,0 +1,94 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Home</title>
+    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/css/bootstrap.min.css">
+    <script type='text/javascript' src='https://www.bing.com/api/maps/mapcontrol?key=YourBingMapsAPIKey&callback=loadMapScenario' async defer></script>
+
+    <style>
+        body {
+            background-color: #f4f4f4;
+        }
+
+        .container {
+            margin-top: 50px;
+        }
+
+        .restaurant-card {
+            margin-bottom: 20px;
+        }
+    </style>
+
+    <!-- Replace YourBingMapsAPIKey with your actual Bing Maps API key -->
+    <script type='text/javascript'>
+        var map;
+
+        function loadMapScenario() {
+            map = new Microsoft.Maps.Map(document.getElementById('myMap'), {
+                credentials: 'AoCfi36QEPKY2QA9HOuZ4_sYPk1htDDlK6NG8wylvls6UCQrBOvnhX2kp3R3qi72',
+                zoom: 6 // Set the zoom level to 10
+            });
+
+            // Add pushpins to the map
+            {% for coord in restaurant_coords %}
+            var loc = new Microsoft.Maps.Location({{ coord[0] }}, {{ coord[1] }});
+            var pin = new Microsoft.Maps.Pushpin(loc);
+            map.entities.push(pin);
+            {% endfor %}
+        }
+    </script>
+
+
+</head>
+<body onload="loadMapScenario()"> <!-- Εδώ εκτελεί τη συνάρτηση loadMapScenario όταν η σελίδα φορτώνει -->
+<div class="container">
+    <h1>Welcome to TourRecSys</h1>
+
+    {% if current_user.is_authenticated %}
+    <h3>Hello, {{ current_user.name }}!</h3>
+    <p><a href="{{ url_for('logout') }}">Logout</a></p>
+
+    <form method="post">
+        <label for="selected_location">Select Location:</label>
+        <select name="selected_location" id="selected_location">
+            <option value="all">All Locations</option>
+            <option value="Athens">Athens</option>
+            <option value="Thessaloniki">Thessaloniki</option>
+            <!-- Προσθέστε περισσότερες επιλογές αν χρειάζεστε -->
+        </select>
+        <input type="submit" value="Filter">
+    </form>
+
+    <h2>Restaurants:</h2>
+    {% for restaurant in restaurants %}
+    <div class="card restaurant-card">
+        <div class="card-body">
+            <h5 class="card-title">{{ restaurant[1] }}</h5>
+            <p class="card-text">{{ restaurant[2] }}</p>
+            <p class="card-text"><strong>location:</strong> {{ restaurant[3] }}</p>
+            <p class="card-text"><strong>Rating:</strong> {{ restaurant[7] }}</p>
+
+            <form action="{{ url_for('rate') }}" method="post">
+                <input type="hidden" name="restaurant_id" value="{{ restaurant[0] }}">
+                <label for="rating">Rate (1-5):</label>
+                <input type="number" id="rating" name="rating" min="1" max="5" required>
+                <button type="submit">Submit Rating</button>
+            </form>
+        </div>
+    </div>
+    {% endfor %}
+
+    {% else %}
+    <p>Please <a href="{{ url_for('login') }}">login</a> to access this page.</p>
+    {% endif %}
+</div>
+
+
+<!-- Στοιχείο HTML για την εμφάνιση του χάρτη -->
+<div id="myMap" class="container" style="width: 83%; height: 400px; margin-bottom: 50px"></div>
+
+</body>
+</html>
