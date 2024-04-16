@@ -16,12 +16,8 @@ app = Flask(__name__, template_folder='templates')
 csrf = CSRFProtect()
 csrf.init_app(app)
 
-# Check if the "MY_SECRET_KEY" environment variable is set
-if "MY_SECRET_KEY" in os.environ:
-    app.config['MY_SECRET_KEY'] = os.getenv("MY_SECRET_KEY")
-else:
-    # If "MY_SECRET_KEY" is not set, generate a random key
-    app.config['MY_SECRET_KEY'] = os.urandom(32)
+# Set secret key from environment variable
+app.secret_key = os.getenv("MY_SECRET_KEY")
 
 app.config['SESSION_COOKIE_SAMESITE'] = 'Lax'
 
