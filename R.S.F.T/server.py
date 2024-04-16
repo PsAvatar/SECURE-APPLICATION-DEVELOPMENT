@@ -14,12 +14,12 @@ load_dotenv()
 
 app = Flask(__name__, template_folder='templates')
 
-# Check if the "SECRET_KEY" environment variable is set
-if "SECRET_KEY" in os.environ:
-    app.config['SECRET_KEY'] = os.getenv("SECRET_KEY")
+# Check if the "MY_SECRET_KEY" environment variable is set
+if "MY_SECRET_KEY" in os.environ:
+    app.config['MY_SECRET_KEY'] = os.getenv("MY_SECRET_KEY")
 else:
-    # If "SECRET_KEY" is not set, generate a random key
-    app.config['SECRET_KEY'] = os.urandom(32)
+    # If "MY_SECRET_KEY" is not set, generate a random key
+    app.config['MY_SECRET_KEY'] = os.urandom(32)
 
 app.config['SESSION_COOKIE_SAMESITE'] = 'Lax'
 
