@@ -11,6 +11,8 @@ import re
 
 load_dotenv()
 
+REGISTER_TEMPLATE = 'Register.html'
+
 
 app = Flask(__name__, template_folder='templates')
 csrf = CSRFProtect()
@@ -33,6 +35,7 @@ app.config['MYSQL_HOST'] = '127.0.0.1'
 app.config['MYSQL_USER'] = 'root'
 app.config['MYSQL_PASSWORD'] = ''
 app.config['MYSQL_DB'] = 'signup'
+
 
 class User(UserMixin):
     pass
@@ -117,12 +120,12 @@ def register():
         # Έλεγχος αν το email πληροί τις προϋποθέσεις
         if not is_valid_email(email):
             flash('Invalid email format. Please use a valid email address.', 'error')
-            return render_template('Register.html', error_message='Invalid email format. Please use a valid email address.')
+            return render_template(REGISTER_TEMPLATE, error_message='Invalid email format. Please use a valid email address.')
 
         # Έλεγχος αν το password πληροί τις προϋποθέσεις
         if not is_valid_password(password):
             flash('Password must contain at least one lowercase letter, one uppercase letter, and one special character (! - . _) and must be at least 8 characters long.', 'error')
-            return render_template('Register.html', error_message='Password must contain at least one lowercase letter, one uppercase letter, and one special character (!-,._) and must be at least 8 characters long.')
+            return render_template(REGISTER_TEMPLATE, error_message='Password must contain at least one lowercase letter, one uppercase letter, and one special character (!-,._) and must be at least 8 characters long.')
 
         # Έλεγχος αν το email υπάρχει ήδη στη βάση δεδομένων
         cur = mysql.connection.cursor()
@@ -132,7 +135,7 @@ def register():
 
         if existing_user:
             flash('Email already exists. Please use a different email.', 'error')
-            return render_template('Register.html', error_message='Email already exists. Please use a different email.')
+            return render_template(REGISTER_TEMPLATE, error_message='Email already exists. Please use a different email.')
 
         hashed_password = bcrypt.generate_password_hash(password).decode('utf-8')
 
@@ -144,7 +147,7 @@ def register():
         flash('Registration successful! You can now log in.', 'success')
         return redirect(url_for('login'))
 
-    return render_template('Register.html')
+    return render_template(REGISTER_TEMPLATE)
 
 
 @app.route('/TourRecSys/Home', methods=['GET', 'POST'])
