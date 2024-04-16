@@ -12,6 +12,7 @@
     <h1>Login Page</h1>
 
     <form method="POST" action="/TourRecSys/Login">
+        <input type="hidden" name="csrf_token" value="{{ csrf_token() }}">
         <label for="email">Email:</label>
         <input type="text" id="email" name="email" required>
 
