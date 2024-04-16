@@ -13,8 +13,7 @@ load_dotenv()
 
 
 app = Flask(__name__, template_folder='templates')
-csrf = CSRFProtect()
-csrf.init_app(app)
+
 
 # Set secret key from environment variable
 app.secret_key = os.getenv("MY_SECRET_KEY")
