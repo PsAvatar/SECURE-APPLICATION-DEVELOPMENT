@@ -1,5 +1,5 @@
 from flask import Flask, render_template, request, redirect, url_for, flash
-from flask_wtf import FlaskForm
+from flask_wtf import FlaskForm, CSRFProtect
 from wtforms import StringField, PasswordField, SubmitField
 from wtforms.csrf.session import SessionCSRF
 from flask_bcrypt import Bcrypt
@@ -13,6 +13,8 @@ load_dotenv()
 
 
 app = Flask(__name__, template_folder='templates')
+csrf = CSRFProtect()
+csrf.init_app(app)
 
 # Check if the "MY_SECRET_KEY" environment variable is set
 if "MY_SECRET_KEY" in os.environ:
