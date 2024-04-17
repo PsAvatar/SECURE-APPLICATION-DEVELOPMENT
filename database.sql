@@ -97,10 +97,10 @@ CREATE TABLE `restaurants` (
 
 INSERT INTO `restaurants` (`id`, `name`, `description`, `location`, `address`, `total_ratings`, `total_rating_sum`, `average_rating`, `latitude`, `longitude`) VALUES
                                                                                                                                                                    (4, 'Mira Me Athens', 'A great place to eat!', 'Athens', '', 3, 11, 3.66667, '37.977370', '23.721870'),
-                                                                                                                                                                   (5, 'Jonah\'s Restaurant', 'Delicious food and cozy atmosphere.', 'Athens', '', 4, 13, 3.25, '37.985480', '23.755850'),
-(6, 'Aleria', 'Specializing in international cuisine.', 'Athens', '', 2, 6, 3, '37.983150', '23.717930'),
-(7, 'Loupino', 'In a disarmingly intimate and warm place with unobtrusive aesthetic and luxury.', 'Thessaloniki', '', 0, 0, 0, '40.634260', '22.936840'),
-(8, 'Akratos Oinos', 'Pivoting back to the traditional Greek cooking but with a constant eye on the future, the menu celebrates authentic Greek recipes interpreted into refined, fine-dining dishes.', 'Thessaloniki', '', 0, 0, 0, '40.634770', '22.937460');
+                                                                                                                                                                   (5, 'Jonah s Restaurant', 'Delicious food and cozy atmosphere.', 'Athens', '', 4, 13, 3.25, '37.985480', '23.755850'),
+                                                                                                                                                                   (6, 'Aleria', 'Specializing in international cuisine.', 'Athens', '', 2, 6, 3, '37.983150', '23.717930'),
+                                                                                                                                                                   (7, 'Loupino', 'In a disarmingly intimate and warm place with unobtrusive aesthetic and luxury.', 'Thessaloniki', '', 0, 0, 0, '40.634260', '22.936840'),
+                                                                                                                                                                   (8, 'Akratos Oinos', 'Pivoting back to the traditional Greek cooking but with a constant eye on the future, the menu celebrates authentic Greek recipes interpreted into refined, fine-dining dishes.', 'Thessaloniki', '', 0, 0, 0, '40.634770', '22.937460');
 
 --
 -- Ευρετήρια για άχρηστους πίνακες
@@ -110,13 +110,13 @@ INSERT INTO `restaurants` (`id`, `name`, `description`, `location`, `address`, `
 -- Ευρετήρια για πίνακα `login`
 --
 ALTER TABLE `login`
-  ADD PRIMARY KEY (`id`);
+    ADD PRIMARY KEY (`id`);
 
 --
 -- Ευρετήρια για πίνακα `ratings`
 --
 ALTER TABLE `ratings`
-  ADD PRIMARY KEY (`id`),
+    ADD PRIMARY KEY (`id`),
   ADD KEY `user_id` (`user_id`),
   ADD KEY `restaurant_id` (`restaurant_id`);
 
@@ -124,7 +124,7 @@ ALTER TABLE `ratings`
 -- Ευρετήρια για πίνακα `restaurants`
 --
 ALTER TABLE `restaurants`
-  ADD PRIMARY KEY (`id`);
+    ADD PRIMARY KEY (`id`);
 
 --
 -- AUTO_INCREMENT για άχρηστους πίνακες
@@ -134,19 +134,19 @@ ALTER TABLE `restaurants`
 -- AUTO_INCREMENT για πίνακα `login`
 --
 ALTER TABLE `login`
-  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=55;
+    MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=55;
 
 --
 -- AUTO_INCREMENT για πίνακα `ratings`
 --
 ALTER TABLE `ratings`
-  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=26;
+    MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=26;
 
 --
 -- AUTO_INCREMENT για πίνακα `restaurants`
 --
 ALTER TABLE `restaurants`
-  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=9;
+    MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=9;
 
 --
 -- Περιορισμοί για άχρηστους πίνακες
@@ -156,7 +156,7 @@ ALTER TABLE `restaurants`
 -- Περιορισμοί για πίνακα `ratings`
 --
 ALTER TABLE `ratings`
-  ADD CONSTRAINT `ratings_ibfk_1` FOREIGN KEY (`user_id`) REFERENCES `login` (`id`),
+    ADD CONSTRAINT `ratings_ibfk_1` FOREIGN KEY (`user_id`) REFERENCES `login` (`id`),
   ADD CONSTRAINT `ratings_ibfk_2` FOREIGN KEY (`restaurant_id`) REFERENCES `restaurants` (`id`);
 COMMIT;
 
