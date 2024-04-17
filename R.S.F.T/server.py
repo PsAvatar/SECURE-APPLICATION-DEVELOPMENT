@@ -15,7 +15,7 @@ REGISTER_TEMPLATE = 'Register.html'
 
 
 app = Flask(__name__, template_folder='templates')
-csrf = CSRFProtect()
+csrf = CSRFProtect(app)
 csrf.init_app(app)
 app.config['WTF_CSRF_ENABLED'] = True
 
